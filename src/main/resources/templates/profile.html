@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Profile</title>
+</head>
+<body>
+<!--/*@thymesVar id="username" type="java.lang.String"*/-->
+<h1>Hello, <span th:text="${username}"></span></h1>
+<a th:href="@{/exam}">Exam</a>
+<a th:href="@{/manage}" sec:authorize="hasRole('ADMIN')">Manage</a>
+<form th:action="@{/logout}" th:method="post">
+    <button type="submit">Log Out</button>
+</form>
+</body>
+</html>

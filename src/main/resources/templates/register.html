@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="user" type="com.nuptsast.model.User"*/-->
+<form th:action="@{/register}" method="post" th:object="${user}">
+    <label for="username">Username:</label>
+    <input id="username" type="text" th:field="*{username}"/><span th:if="${#fields.hasErrors('username')}">Wrong Username</span><br/>
+    <label for="password">Password:</label>
+    <input id="password" type="password" th:field="*{password}"/><span th:if="${#fields.hasErrors('password')}">Wrong password</span><br/>
+    <label for="targetDepartment">Target Department: </label>
+    <select th:field="*{targetDepartment}" id="targetDepartment">
+        <option value="计算机部"></option>
+        <option value="网络部"></option>
+        <option value="电子部"></option>
+    </select>
+    <input type="submit"/>
+</form>
+</body>
+</html>

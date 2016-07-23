@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="user" type="com.nuptsast.model.User"*/-->
+<form th:action="@{/login}" method="post" th:object="${user}">
+    <label for="username">Username:</label>
+    <input id="username" type="text" th:field="*{username}"/><br/>
+    <label for="password">Password:</label>
+    <input id="password" type="password" th:field="*{password}"/><br/>
+    <label for="rememberMe">Remember Me:</label>
+    <input type="checkbox" id="rememberMe" name="remember-me"/><br/>
+    <input type="submit"/>
+</form>
+</body>
+</html>

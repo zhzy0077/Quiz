@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="question" type="com.nuptsast.model.Question"*/-->
+<table th:object="${question}">
+    <tr>
+        <th th:field="*{question}"></th>
+    </tr>
+    <tr>
+        <td th:each="choice : *{choices}" th:text="${choice}"></td>
+    </tr>
+</table>
+</body>
+</html>
