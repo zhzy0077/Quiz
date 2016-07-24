@@ -13,9 +13,9 @@
     <input id="password" type="password" th:field="*{password}"/><span th:if="${#fields.hasErrors('password')}">Wrong password</span><br/>
     <label for="targetDepartment">Target Department: </label>
     <select th:field="*{targetDepartment}" id="targetDepartment">
-        <option value="计算机部"></option>
-        <option value="网络部"></option>
-        <option value="电子部"></option>
+        <option value="计算机部" th:text="计算机部"></option>
+        <option value="网络部" th:text="网络部"></option>
+        <option value="电子部" th:text="电子部"></option>
     </select>
     <input type="submit"/>
 </form>

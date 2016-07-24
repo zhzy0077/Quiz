@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,9 +40,16 @@ public class ManageController {
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public
     @ResponseBody
-    ObjectNode importQuestion(@RequestBody Question question) {
-        questionService.addQuestion(question);
+    ObjectNode importQuestion(@RequestBody String json) {
+        System.out.println(json);
+//        questionService.addQuestion(question);
         ObjectMapper mapper = new ObjectMapper();
+        try {
+            Question question = mapper.readValue(json, Question.class);
+            questionService.addQuestion(question);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ObjectNode node = mapper.createObjectNode();
         node.put("status", true);
         return node;

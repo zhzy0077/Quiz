@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) {
         String encodedPass = new BCryptPasswordEncoder().encode(user.getPassword());
-        User newUser = new User(user.getUsername(), encodedPass);
+        User newUser = new User(user.getUsername(), encodedPass, user.getTargetDepartment());
         return userRepository.save(newUser);
     }
 }

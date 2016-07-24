@@ -28,6 +28,12 @@ public class User {
     public User() {
     }
 
+    public User(String username, String password, String targetDepartment) {
+        this.username = username;
+        this.password = password;
+        this.targetDepartment = targetDepartment;
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;

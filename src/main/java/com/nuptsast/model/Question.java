@@ -15,7 +15,7 @@ public class Question {
     private Long id;
     @NotNull
     private String question;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Choice> choices;
     @NotNull
     private String department;

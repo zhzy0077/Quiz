@@ -17,15 +17,12 @@ class Choice {
     private Long id;
     @NotNull
     private String choice;
-    @NotNull
-    private Long questionId;
 
     public Choice() {
     }
 
-    public Choice(String choice, Long questionId) {
+    public Choice(String choice) {
         this.choice = choice;
-        this.questionId = questionId;
     }
 
     public Long getId() {
@@ -42,13 +39,5 @@ class Choice {
 
     public void setChoice(String choice) {
         this.choice = choice;
-    }
-
-    public Long getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
     }
 }
