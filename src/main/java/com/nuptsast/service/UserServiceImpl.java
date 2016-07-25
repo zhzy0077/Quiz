@@ -25,4 +25,9 @@ public class UserServiceImpl implements UserService {
         User newUser = new User(user.getUsername(), encodedPass, user.getTargetDepartment());
         return userRepository.save(newUser);
     }
+
+    @Override
+    public User getUser(String username) {
+        return userRepository.findOneByUsername(username);
+    }
 }

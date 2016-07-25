@@ -8,7 +8,7 @@
 <!--/*@thymesVar id="question" type="com.nuptsast.model.Question"*/-->
 <table th:object="${question}">
     <tr>
-        <th th:field="*{question}"></th>
+        <th th:text="*{question}"></th>
     </tr>
     <tr>
         <td th:each="choice : *{choices}" th:text="${choice}"></td>

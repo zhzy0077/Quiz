@@ -61,4 +61,9 @@ public class Question {
     public void setDepartment(String department) {
         this.department = department;
     }
+
+    @Override
+    public String toString() {
+        return question;
+    }
 }

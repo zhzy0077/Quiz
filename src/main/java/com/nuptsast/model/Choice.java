@@ -40,4 +40,9 @@ class Choice {
     public void setChoice(String choice) {
         this.choice = choice;
     }
+
+    @Override
+    public String toString() {
+        return choice;
+    }
 }

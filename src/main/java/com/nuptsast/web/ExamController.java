@@ -1,7 +1,9 @@
 package com.nuptsast.web;
 
 import com.nuptsast.model.Question;
+import com.nuptsast.model.User;
 import com.nuptsast.service.QuestionService;
+import com.nuptsast.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,17 +21,20 @@ import java.util.List;
 @Controller
 public class ExamController {
     private final QuestionService questionService;
+    private final UserService userService;
 
     @Autowired
-    public ExamController(QuestionService questionService) {
+    public ExamController(QuestionService questionService, UserService userService) {
         this.questionService = questionService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/exam", method = RequestMethod.GET)
     public String selectQuestion(HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (session.getAttribute("questions") == null) {
-            session.setAttribute("questions", questionService.getQuestions(username));
+            User user = userService.getUser(username);
+            session.setAttribute("questions", questionService.getQuestions(user.getTargetDepartment()));
         }
         return "redirect:/exam/0";
     }
