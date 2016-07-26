@@ -24,14 +24,19 @@ public class User {
     private String authority = "ROLE_USER";
     @NotNull
     private String targetDepartment;
+    @NotNull
+    private String phoneNumber;
+    @OneToOne
+    private Answer answer = new Answer();
 
     public User() {
     }
 
-    public User(String username, String password, String targetDepartment) {
+    public User(String username, String password, String targetDepartment, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.targetDepartment = targetDepartment;
+        this.phoneNumber = phoneNumber;
     }
 
     public User(String username, String password) {
@@ -77,5 +82,21 @@ public class User {
 
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 }

@@ -22,12 +22,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) {
         String encodedPass = new BCryptPasswordEncoder().encode(user.getPassword());
-        User newUser = new User(user.getUsername(), encodedPass, user.getTargetDepartment());
+        User newUser = new User(user.getUsername(), encodedPass, user.getTargetDepartment(), user.getPhoneNumber());
         return userRepository.save(newUser);
     }
 
     @Override
     public User getUser(String username) {
         return userRepository.findOneByUsername(username);
+    }
+
+    @Override
+    public void addAnswer(Long userId, Long questionId, String answer) {
+        User user = userRepository.findOne(userId);
+        user.getAnswer().getAnswer().put(questionId, answer);
     }
 }
