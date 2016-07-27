@@ -11,6 +11,4 @@ public interface UserService {
     User register(User user);
 
     User getUser(String username);
-
-    void addAnswer(Long userId, Long questionId, String answer);
 }

@@ -26,8 +26,6 @@ public class User {
     private String targetDepartment;
     @NotNull
     private String phoneNumber;
-    @OneToOne
-    private Answer answer = new Answer();
 
     public User() {
     }
@@ -92,11 +90,4 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Answer getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(Answer answer) {
-        this.answer = answer;
-    }
 }

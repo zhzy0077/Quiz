@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     public User register(User user) {
         String encodedPass = new BCryptPasswordEncoder().encode(user.getPassword());
         User newUser = new User(user.getUsername(), encodedPass, user.getTargetDepartment(), user.getPhoneNumber());
-        return userRepository.save(newUser);
+        return userRepository.saveAndFlush(newUser);
     }
 
     @Override
@@ -31,9 +31,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findOneByUsername(username);
     }
 
-    @Override
-    public void addAnswer(Long userId, Long questionId, String answer) {
-        User user = userRepository.findOne(userId);
-        user.getAnswer().getAnswer().put(questionId, answer);
-    }
 }

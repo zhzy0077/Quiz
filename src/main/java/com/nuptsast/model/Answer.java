@@ -4,9 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Zheng on 16/7/26.
@@ -17,14 +14,17 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
-    private Map<Long, String> answer = new HashMap<>();
+    private Long userId;
+    private Long questionId;
+    private String answer;
 
-    public Answer(Map<Long, String> answer) {
+    public Answer(Long userId, Long questionId, String answer) {
+        this.userId = userId;
+        this.questionId = questionId;
         this.answer = answer;
     }
 
-    Answer() {
+    public Answer() {
     }
 
     public Long getId() {
@@ -35,11 +35,27 @@ public class Answer {
         this.id = id;
     }
 
-    public Map<Long, String> getAnswer() {
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Map<Long, String> answer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
     }
 }
