@@ -1,18 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+<head th:replace="fragment :: head(title = '考试')">
 </head>
 <body>
 <!--/*@thymesVar id="question" type="com.nuptsast.model.Question"*/-->
-<table th:object="${question}">
-    <tr>
-        <th th:text="*{question}"></th>
-    </tr>
-    <tr>
-        <td th:each="choice : *{choices}" th:text="${choice}"></td>
-    </tr>
-</table>
+<!--/*@thymesVar id="questionCount" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="questionId" type="java.lang.Integer"*/-->
+<header th:replace="fragment :: header"></header>
+<main>
+    <!--<h5 th:text="${session.finished}"></h5>-->
+    <div class="row examcard">
+        <ul class="pagination" th:each="i : ${#numbers.sequence(0, questionCount - 1)}">
+            <li>
+                <button class="btn waves-effect waves-light "><i class="fa fa-sticky-note-o"></i>答题卡</button>
+            </li>
+            <li th:class="waves-effect" th:classappend="${questionId == 0} ? 'disabled'">
+                <a th:href="@{'/exam/' + ${questionId - 1}}"><i class="fa fa-angle-left"></i></a>
+            </li>
+            <li th:classappend="|${questionId == i ? 'active' : 'waves-effect'}
+                                 ${session.finished.containsKey(questionId) ? 'finished' : 'no-finished'}|">
+                <a th:href="@{'/exam/' + ${i}}" th:text="${i}"></a>
+            </li>
+            <li class="waves-effect" th:classappend="${questionId == questionCount - 1} ? 'disabled'">
+                <a th:href="@{'/exam/' + ${questionId + 1}}"><i class="fa fa-angle-right"></i></a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card-panel cyan lighten-5 card-pad-1">
+                    <h5>NO.1</h5>
+                    <span class="black-text" th:text="${question.question}">
+                     </span>
+                </div>
+                <div class="card-panel blue-grey lighten-5 card-pad-2">
+                    <h5>选项：</h5>
+                    <span class="black-text"></span>
+                    <ul th:each="choice : ${question.choices}">
+                        <li th:text="${choice}"></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col s12 m1"></div>
+            <div class="col s12 m5">
+                <div class="col s12 m12">
+                    <p id="info">
+                        <i class="fa  fa-info-circle" style="color: red;font-size: 22px"></i>
+                        请在以下答题框作答，作答须包括答案（选项）以及对答案的解释说明，只有选项不得分！
+                    </p>
+                </div>
+                <div class="col s12 m12">
+                    <!--/*@thymesVar id="answer" type="com.nuptsast.model.Answer"*/-->
+                    <form class="col s12" th:action="@{'/exam/' + ${questionId}}" th:method="post">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea name="answer" id="textarea1" class="materialize-textarea" length="300"
+                                          th:text="${session.finished.get(question.getId())}"></textarea>
+                                <label for="textarea1">答题框</label>
+                            </div>
+                        </div>
+                        <div class="input-field col s4">
+                            <button class="btn waves-effect waves-light btn-t"
+                                    th:attr="disabled = ${questionId == 0 ? 'disabled' : null}"
+                                    name="submit" type="submit" value="prev"> 上一题
+                            </button>
+                        </div>
+                        <div class="input-field col s4">
+                            <button class="btn waves-effect waves-light btn-t"
+                                    th:attr="disabled = ${questionId == questionCount - 1 ? 'disabled' : null}"
+                                    name="submit" type="submit" value="next"> 下一题
+                            </button>
+                        </div>
+                        <div class="input-field col s4">
+                            <button class="btn waves-effect waves-light btn-t"
+                                    name="submit" type="submit" value="submit"> 交 卷
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragment :: footer"></footer>
 </body>
 </html>

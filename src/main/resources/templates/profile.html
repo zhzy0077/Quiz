@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Profile</title>
+>
+<head th:replace="fragment :: head(title = '个人信息')">
 </head>
 <body>
-<!--/*@thymesVar id="username" type="java.lang.String"*/-->
-<h1>Hello, <span th:text="${username}"></span></h1>
-<a th:href="@{/exam}">Exam</a>
-<a th:href="@{/manage}" sec:authorize="hasRole('ADMIN')">Manage</a>
-<form th:action="@{/logout}" th:method="post">
-    <button type="submit">Log Out</button>
-</form>
+<header th:replace="fragment :: header"></header>
+<!--/*@thymesVar id="user" type="com.nuptsast.model.User"*/-->
+<main>
+    <div class="container">
+        <div id="title">
+            <h5>Profile</h5>
+        </div>
+        <!--/*@thymesVar id="status" type="java.lang.Boolean"*/-->
+        <h5 th:if="${status != null}" th:text="${status} ? '修改成功' : '修改失败, 请检查是否填写有误'"></h5>
+        <!--<h5 th:text="${user.toString()}"></h5>-->
+        <form th:action="@{/profile}" method="post" th:object="${user}">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input disabled="disabled" id="username" type="text" class="validate" th:field="*{username}"/>
+                    <label for="username">StudentID</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="input-field col s12">
+                    <input id="tel" type="tel" class="validate" th:field="*{phoneNumber}"
+                           th:classappend="${#fields.hasErrors('phoneNumber')}? invalid"/>
+                    <label for="tel">Telephone</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="input-field col s12">
+                    <select id="targetDepartment" th:field="*{targetDepartment}">
+                        <option value="计算机部" th:text="计算机部"></option>
+                        <option value="电子部" th:text="电子部"></option>
+                        <option value="网络部" th:text="网络部"></option>
+                    </select>
+                    <label for="targetDepartment">Target Department</label>
+                </div>
+            </div>
+            <div class="submit">
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</main>
+<footer th:replace="fragment :: footer"></footer>
 </body>
 </html>

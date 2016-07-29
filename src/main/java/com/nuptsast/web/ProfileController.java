@@ -1,5 +1,9 @@
 package com.nuptsast.web;
 
+import com.nuptsast.model.User;
+import com.nuptsast.service.UserService;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,11 +20,51 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
+    private final UserService userService;
+    private Logger logger = Logger.getLogger(getClass());
+
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @Autowired
+    public ProfileController(UserService userService) {
+        this.userService = userService;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public String profile(Model model, HttpSession session) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("username", auth.getName());
-        session.setAttribute("username", auth.getName());
+        String username = auth.getName();
+        User user = userService.getUser(username);
+        model.addAttribute("user", user);
+        session.setAttribute("user", user);
         return "profile";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String updateProfile(User user, Model model, HttpSession session) {
+        if (!validate(user.getPhoneNumber(), user.getTargetDepartment())) {
+            model.addAttribute("status", Boolean.FALSE);
+            user.setUsername(((User) session.getAttribute("user")).getUsername());
+            return "profile";
+        }
+        logger.info("update " + user);
+        User originUser = (User) session.getAttribute("user");
+        originUser.setPhoneNumber(user.getPhoneNumber());
+        originUser.setTargetDepartment(user.getTargetDepartment());
+        userService.updateUser(originUser);
+        model.addAttribute("status", Boolean.TRUE);
+        user.setUsername(((User) session.getAttribute("user")).getUsername());
+        return "profile";
+    }
+
+    private boolean validate(String phoneNumber, String targetDepartment) {
+        if ((phoneNumber == null || phoneNumber.length() != 11)) {
+            logger.info("phoneNumber " + phoneNumber + " Wrong");
+            return false;
+        }
+        if (targetDepartment == null) {
+            logger.info("department Wrong");
+            return false;
+        }
+        return true;
     }
 }

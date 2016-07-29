@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+<head th:replace="fragment :: head(title = '主页')">
 </head>
 <body>
-<a th:href="@{/login}">Login</a>
-<a th:href="@{/register}">Register</a>
+<header th:replace="fragment :: header"></header>
+<main>
+    <div class="container">
+        <div id="title">
+            <h5>欢迎参加南京邮电大学</h5>
+            <h5>xxxxx比赛</h5>
+        </div>
+        <div class="row">
+            <div class="col s12 m2">
+            </div>
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img th:src="@{/img/sast.jpg}"/>
+                    </div>
+                    <div class="card-content">
+                        <p>扫描二维码，关注“南邮校科协”官方微信，获取比赛咨询。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img th:src="@{/img/group.png}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="infomation">
+            <h5>点击<a th:href="@{/register}">注册</a>报名参加本次比赛</h5>
+        </div>
+    </div>
+    <div>
+
+    </div>
+</main>
+<footer th:replace="fragment :: footer"></footer>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.nuptsast.service;
 
 import com.nuptsast.data.UserRepository;
 import com.nuptsast.model.User;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    private Logger logger = Logger.getLogger(getClass());
     private UserRepository userRepository;
 
     @Autowired
@@ -31,4 +33,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findOneByUsername(username);
     }
 
+    @Override
+    public User updateUser(User user) {
+        logger.info("Saving User " + user);
+        return userRepository.saveAndFlush(user);
+    }
 }

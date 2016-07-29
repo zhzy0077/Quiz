@@ -1,5 +1,7 @@
 package com.nuptsast.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,6 +27,7 @@ public class User {
     @NotNull
     private String targetDepartment;
     @NotNull
+    @Size(max = 11, min = 11)
     private String phoneNumber;
 
     public User() {
@@ -90,4 +93,8 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

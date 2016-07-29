@@ -36,7 +36,7 @@ public class RegisterController {
     @RequestMapping(method = RequestMethod.POST)
     public String processRegister(@Valid User user, Errors errors, HttpServletRequest request) throws ServletException {
         if (errors.hasErrors()) {
-            System.out.println(errors.getAllErrors());
+//            System.out.println(errors.getAllErrors());
             return "register";
         }
         userService.register(user);

@@ -1,23 +1,62 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment :: head(title = '注册')">
 </head>
 <body>
+<header th:replace="fragment :: header"></header>
 <!--/*@thymesVar id="user" type="com.nuptsast.model.User"*/-->
-<form th:action="@{/register}" method="post" th:object="${user}">
-    <label for="username">Username:</label>
-    <input id="username" type="text" th:field="*{username}"/><span th:if="${#fields.hasErrors('username')}">Wrong Username</span><br/>
-    <label for="password">Password:</label>
-    <input id="password" type="password" th:field="*{password}"/><span th:if="${#fields.hasErrors('password')}">Wrong password</span><br/>
-    <label for="targetDepartment">Target Department: </label>
-    <select th:field="*{targetDepartment}" id="targetDepartment">
-        <option value="计算机部" th:text="计算机部"></option>
-        <option value="网络部" th:text="网络部"></option>
-        <option value="电子部" th:text="电子部"></option>
-    </select>
-    <input type="submit"/>
-</form>
+<main>
+    <div class="container">
+        <div id="title">
+            <h5>Register</h5>
+        </div>
+        <form th:action="@{/register}" th:method="post" th:object="${user}">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="username" type="text" th:field="*{username}" class="validate"
+                           th:classappend="${#fields.hasErrors('username')}? invalid"/>
+                    <label for="username">StudentID</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="input-field col s12">
+                    <input id="password" type="password" th:field="*{password}" class="validate"
+                           th:classappend="${#fields.hasErrors('username')}? invalid"/>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="input-field col s12">
+                    <input id="confirm_password" type="password" class="validate"/>
+                    <label for="confirm_password">Confirm Password</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="input-field col s12">
+                    <input id="tel" type="tel" th:field="*{phoneNumber}" class="validate"
+                           th:classappend="${#fields.hasErrors('phoneNumber')}? invalid"/>
+                    <label for="tel">Telephone</label>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="input-field col s12">
+                    <select th:field="*{targetDepartment}" id="targetDepartment">
+                        <option value="计算机部" th:text="计算机部"></option>
+                        <option value="电子部" th:text="电子部"></option>
+                        <option value="网络部" th:text="网络部"></option>
+                    </select>
+                    <label for="targetDepartment">Target Department</label>
+                </div>
+            </div>
+
+            <div class="submit">
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                    <i class="fa fa-check"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragment :: footer"></footer>
 </body>
 </html>
