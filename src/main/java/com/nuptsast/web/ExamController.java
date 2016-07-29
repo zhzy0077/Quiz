@@ -70,9 +70,9 @@ public class ExamController {
         answerService.saveAnswer(user.getId(), questions.get(questionId.intValue()).getId(), answer);
         finished.put(questions.get(questionId.intValue()).getId(), answer);
         if (Objects.equals(direct, "next")) {
-            return "redirect:/exam" + (questionId + 1);
+            return "redirect:/exam/" + (questionId + 1);
         } else if (Objects.equals(direct, "prev")) {
-            return "redirect:/exam" + (questionId - 1);
+            return "redirect:/exam/" + (questionId - 1);
         } else {
             return "redirect:/profile";
         }

@@ -10,15 +10,16 @@
 <main>
     <!--<h5 th:text="${session.finished}"></h5>-->
     <div class="row examcard">
-        <ul class="pagination" th:each="i : ${#numbers.sequence(0, questionCount - 1)}">
+        <ul class="pagination">
             <li>
                 <button class="btn waves-effect waves-light "><i class="fa fa-sticky-note-o"></i>答题卡</button>
             </li>
             <li th:class="waves-effect" th:classappend="${questionId == 0} ? 'disabled'">
                 <a th:href="@{'/exam/' + ${questionId - 1}}"><i class="fa fa-angle-left"></i></a>
             </li>
-            <li th:classappend="|${questionId == i ? 'active' : 'waves-effect'}
-                                 ${session.finished.containsKey(questionId) ? 'finished' : 'no-finished'}|">
+            <li th:each="i : ${#numbers.sequence(0, questionCount - 1)}"
+                th:classappend="|${questionId == i ? 'active' : 'waves-effect'}
+                                 ${session.finished.containsKey(question.getId()) ? 'finished' : 'no-finished'}|">
                 <a th:href="@{'/exam/' + ${i}}" th:text="${i}"></a>
             </li>
             <li class="waves-effect" th:classappend="${questionId == questionCount - 1} ? 'disabled'">
@@ -31,7 +32,7 @@
         <div class="row">
             <div class="col s12 m6">
                 <div class="card-panel cyan lighten-5 card-pad-1">
-                    <h5>NO.1</h5>
+                    <h5>NO.<span th:text="${questionId}"></span></h5>
                     <span class="black-text" th:text="${question.question}">
                      </span>
                 </div>

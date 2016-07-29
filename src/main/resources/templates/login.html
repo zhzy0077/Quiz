@@ -7,8 +7,11 @@
 <!--/*@thymesVar id="user" type="com.nuptsast.model.User"*/-->
 <main>
     <div class="container">
+        <div id="title">
+            <h5>Login</h5>
+            <h5 th:if="${param.error != null}">账号或密码错误!</h5>
+        </div>
         <form th:action="@{/login}" method="post" th:object="${user}">
-            <div th:if="${param.error != null}" id="title"><h5>账号或密码错误!</h5></div>
             <div class="row">
                 <div class="input-field col s12">
                     <input id="username" type="text" class="validate" th:field="*{username}"/>
