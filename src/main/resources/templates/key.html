@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment :: head(title = 'Key')">
+</head>
+<body>
+<header th:replace="fragment :: header"></header>
+<main>
+    <div class="container">
+        <div id="title">
+            <h5>Key</h5>
+            <h5 th:if="${param.error != null}">密钥错误!</h5>
+        </div>
+        <form th:action="@{/key}" method="post">
+            <div class="row" style="margin-top:20px">
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate" th:name="key">
+                    <label for="password">Key</label>
+                </div>
+            </div>
+            <div class="submit">
+                <button class="btn waves-effect waves-light" type="submit" name="action"><i class="fa fa-check"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragment :: footer"></footer>
+</body>
+</html>

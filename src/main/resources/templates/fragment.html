@@ -14,15 +14,17 @@
 <header>
     <nav>
         <div class="nav-wrapper teal darken-2">
-            <a th:href="@{/}" class="brand-logo" style="font-size:1.5em;padding-left:1em">南京邮电大学xxxxx比赛
+            <a th:href="@{/}" class="brand-logo" style="font-size:1.5em;padding-left:1em">
+                南京邮电大学xxxxx比赛
             </a>
-            <a data-activates="mobile-demo" class="button-collapse"><i class="fa fa fa-bars"
-                                                                       style="position:relative;margin-left:10px"></i></a>
+            <a data-activates="mobile-demo" class="button-collapse">
+                <i class="fa fa fa-bars"
+                   style="position:relative;margin-left:10px"></i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a th:href="@{/exam}" sec:authorize="hasRole('USER')">试题</a></li>
                 <li><a th:href="@{/rule}">比赛规则</a></li>
                 <li><a th:href="@{/faq}">FAQ</a></li>
-                <li><a th:href="@{/faq}" sec:authorize="hasRole('ADMIN')">后台管理</a></li>
+                <li><a th:href="@{/manage}" sec:authorize="hasRole('ADMIN')">后台管理</a></li>
                 <li><a th:href="@{/profile}" sec:authorize="authenticated">个人中心</a></li>
                 <li><a onclick="document.getElementById('logout').submit();" sec:authorize="authenticated">登出</a></li>
                 <li><a th:href="@{/login}" sec:authorize="!authenticated">登录</a></li>
@@ -32,7 +34,7 @@
                 <li><a th:href="@{/exam}" sec:authorize="hasRole('USER')">试题</a></li>
                 <li><a th:href="@{/rule}">比赛规则</a></li>
                 <li><a th:href="@{/faq}">FAQ</a></li>
-                <li><a th:href="@{/faq}" sec:authorize="hasRole('ADMIN')">后台管理</a></li>
+                <li><a th:href="@{/manage}" sec:authorize="hasRole('ADMIN')">后台管理</a></li>
                 <li><a th:href="@{/profile}" sec:authorize="authenticated">个人中心</a></li>
                 <li><a onclick="document.getElementById('logout').submit();" sec:authorize="authenticated">登出</a></li>
                 <li><a th:href="@{/login}" sec:authorize="!authenticated">登录</a></li>

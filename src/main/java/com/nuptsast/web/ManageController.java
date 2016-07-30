@@ -4,11 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.nuptsast.model.Question;
 import com.nuptsast.service.QuestionService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ import java.util.List;
 @RequestMapping()
 public class ManageController {
     private final QuestionService questionService;
+    private Logger logger = Logger.getLogger(getClass());
 
     @Autowired
     public ManageController(QuestionService questionService) {
@@ -26,7 +28,8 @@ public class ManageController {
     }
 
     @RequestMapping(value = "/manage", method = RequestMethod.GET)
-    public String manage() {
+    public String manage(Model model) {
+        model.addAttribute("question", new Question());
         return "manage";
     }
 
@@ -40,17 +43,11 @@ public class ManageController {
     @RequestMapping(value = "/import", method = RequestMethod.POST)
     public
     @ResponseBody
-    ObjectNode importQuestion(@RequestBody String json) {
-        System.out.println(json);
-//        questionService.addQuestion(question);
+    ObjectNode importQuestion(@RequestBody Question question) {
+        logger.info("question to be imported is " + question);
         ObjectMapper mapper = new ObjectMapper();
-        try {
-            Question question = mapper.readValue(json, Question.class);
-            questionService.addQuestion(question);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         ObjectNode node = mapper.createObjectNode();
+        questionService.addQuestion(question);
         node.put("status", true);
         return node;
     }

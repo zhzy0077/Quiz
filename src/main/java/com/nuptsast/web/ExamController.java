@@ -47,6 +47,9 @@ public class ExamController {
 
     @RequestMapping(value = "/exam/{questionId}", method = RequestMethod.GET)
     public String showQuestion(@PathVariable Integer questionId, Model model, HttpSession session) {
+        if (session.getAttribute("key") == null) {
+            return "redirect:/key";
+        }
         Object questions = session.getAttribute("questions");
         if (questions == null) {
             return "redirect:/exam";

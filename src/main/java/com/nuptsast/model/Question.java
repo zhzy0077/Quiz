@@ -1,5 +1,7 @@
 package com.nuptsast.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -64,6 +66,6 @@ public class Question {
 
     @Override
     public String toString() {
-        return question;
+        return ToStringBuilder.reflectionToString(this);
     }
 }
