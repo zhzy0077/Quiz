@@ -34,10 +34,10 @@ public class ManageController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    List<Question> searchQuestion(@RequestParam("question") String question) {
-        return questionService.findQuestionContaining(question);
+    public String searchQuestion(@RequestParam("question") String question, Model model) {
+        List<Question> questions = questionService.findQuestionContaining(question);
+        model.addAttribute("questions", questions);
+        return "manage";
     }
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
@@ -53,13 +53,8 @@ public class ManageController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ObjectNode deleteQuestion(@RequestParam("id") Long id) {
+    public String deleteQuestion(@RequestParam("id") Long id) {
         questionService.removeQuestion(id);
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode node = mapper.createObjectNode();
-        node.put("status", true);
-        return node;
+        return "manage";
     }
 }

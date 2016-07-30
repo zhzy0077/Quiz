@@ -16,7 +16,7 @@
             <form method="post" th:object="${question}" th:action="@{/import}" id="submitQuestion">
                 <div class="row" id="addQue">
                     <div class="input-field col s12">
-                        <select id="department" th:field="*{department}">
+                        <select id="department">
                             <option value="计算机部">计算机部</option>
                             <option value="网络部">网络部</option>
                             <option value="电子部">电子部</option>
@@ -25,51 +25,46 @@
                     </div>
                     <div class="input-field col s12">
                         <textarea id="textarea1" class="materialize-textarea"
-                                  th:field="*{question}"></textarea>
+                        ></textarea>
                         <label for="textarea1">题目内容</label>
                     </div>
-                </div>
-                <div class='input-field col s12' th:each="choice : *{choices}">
-                    <input name='choices' id='select' type='text' class='validate sel' th:text="${choice.choice}"/>
-                    <label for='select'>选项：</label>
                 </div>
                 <button type="button" class="waves-effect waves-light btn" id="addChoice">添加选项</button>
                 <button type="submit" class="waves-effect waves-light btn" id="submitQue">提交</button>
             </form>
         </div>
         <div class="col s12 m4">
-            <input placeholder="Search" id="first_name" type="text" class="validate"/>
-            <table>
-                <thead>
-                <tr>
-                    <th data-field="id">ID</th>
-                    <th data-field="name">Content</th>
-                    <th data-field="price">Del</th>
-                </tr>
-                </thead>
+            <form th:action="@{/search}" method="post">
+                <input placeholder="Search" id="first_name" name="question" type="text" class="validate"/>
+                <div class="col s12 m2">
+                    <button class="waves-effect waves-light btn" type="submit">Search</button>
+                </div>
+            </form>
+            <form th:action="@{/delete}" method="post">
+                <table>
+                    <thead>
+                    <tr>
+                        <th data-field="id">ID</th>
+                        <th data-field="name">Content</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--/*@thymesVar id="questions" type="java.util.List<com.nuptsast.model.Question>"*/-->
+                    <tr th:each="question : ${questions}">
+                        <td th:text="${question.id}"></td>
+                        <td th:text="${question.question}"></td>
+                        <th th:each="choice : ${question.choices}" th:text="${choice.choice}"></th>
+                        <td>
+                            <button class="waves-effect waves-light btn" type="submit"
+                                    name="id" th:value="${question.id}">Delete
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
 
-                <tbody>
-                <tr>
-                    <td>Alvin</td>
-                    <td>Eclair</td>
-                    <td>del</td>
-                </tr>
-                <tr>
-                    <td>Alan</td>
-                    <td>Jellybean</td>
-                    <td>del</td>
-                </tr>
-                <tr>
-                    <td>Jonathan</td>
-                    <td>Lollipop</td>
-                    <td>del</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col s12 m2">
-            <a class="waves-effect waves-light btn">Search</a>
-        </div>
 
     </div>
 </main>
