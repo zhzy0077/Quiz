@@ -29,7 +29,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/register").permitAll()
+                .antMatchers("/", "/login", "/register", "/rule", "/faq").permitAll()
                 .antMatchers("/css/**", "/fonts/**", "/js/**", "/img/**").permitAll()
                 .antMatchers("/manage", "/search", "/import", "/delete").hasRole("ADMIN")
                 .anyRequest().authenticated()
