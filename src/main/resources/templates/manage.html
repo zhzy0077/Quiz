@@ -6,9 +6,10 @@
 <header th:replace="fragment :: header"></header>
 <main>
     <div class="row" style="margin-top: 15px">
+        <h5 th:if="${param.error != null}">上传失败了喵, 有啥问题我也不知道喵</h5>
         <div class="col s12 m6 container">
-            <form method="post" action="" enctype="multipart/form-data">
-                <input type="file" class="file-path validate"/>
+            <form method="post" th:action="@{/importFile}" enctype="multipart/form-data">
+                <input type="file" name="file" class="file-path validate"/>
                 <br/><br/>
                 <input type="submit" name="submit"/>
             </form>

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -50,6 +52,19 @@ public class ManageController {
         questionService.addQuestion(question);
         node.put("status", true);
         return node;
+    }
+
+    @RequestMapping(value = "/importFile", method = RequestMethod.POST)
+    public String uploadFile(
+            @RequestParam("file") MultipartFile file) {
+        logger.info(file.getContentType() + " " + file.getOriginalFilename() + " " + file.getSize());
+        try {
+            questionService.importFile(file.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/manage?error";
+        }
+        return "redirect:/manage";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

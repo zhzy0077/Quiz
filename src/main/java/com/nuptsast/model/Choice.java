@@ -1,5 +1,7 @@
 package com.nuptsast.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * All Rights Reversed.
  */
 @Entity
-class Choice {
+public class Choice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -43,6 +45,6 @@ class Choice {
 
     @Override
     public String toString() {
-        return choice;
+        return ToStringBuilder.reflectionToString(this);
     }
 }

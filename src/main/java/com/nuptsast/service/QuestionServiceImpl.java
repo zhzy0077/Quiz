@@ -1,10 +1,18 @@
 package com.nuptsast.service;
 
 import com.nuptsast.data.QuestionRepository;
+import com.nuptsast.model.Choice;
 import com.nuptsast.model.Question;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,5 +53,26 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<Question> findQuestionContaining(String question) {
         return questionRepository.findByQuestionContaining(question);
+    }
+
+    @Override
+    public Boolean importFile(InputStream file) throws IOException {
+        Workbook workbook = new XSSFWorkbook(file);
+        Sheet sheet = workbook.getSheetAt(0);
+        for (int i = sheet.getFirstRowNum() + 1;
+             i <= sheet.getLastRowNum(); i++) {
+            Row row = sheet.getRow(i);
+            String department = row.getCell(0).getStringCellValue();
+            String questionString = row.getCell(1).getStringCellValue();
+            List<Choice> choices = new ArrayList<>();
+            for (int j = 2; j < row.getLastCellNum(); j++) {
+                String choice = row.getCell(j).getStringCellValue();
+                choices.add(new Choice(choice));
+            }
+            Question question = new Question(questionString, choices, department);
+            questionRepository.save(question);
+        }
+        questionRepository.flush();
+        return true;
     }
 }
