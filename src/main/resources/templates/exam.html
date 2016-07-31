@@ -40,7 +40,7 @@
                     <h5>选项：</h5>
                     <span class="black-text"></span>
                     <ul th:each="choice : ${question.choices}">
-                        <li th:text="${choice}"></li>
+                        <li th:text="${choice.choice}"></li>
                     </ul>
 
                 </div>
