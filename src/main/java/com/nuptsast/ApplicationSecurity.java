@@ -31,7 +31,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/login", "/register", "/rule", "/faq").permitAll()
                 .antMatchers("/css/**", "/fonts/**", "/js/**", "/img/**").permitAll()
-                .antMatchers("/manage", "/search", "/import", "/delete").hasRole("ADMIN")
+                .antMatchers("/template.xlsx", "/manage", "/search", "/import", "/delete").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/profile")
                 .failureHandler(new UsernameStoringUrlAuthenticationFailureHandler("/login?error"))

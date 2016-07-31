@@ -9,6 +9,7 @@
         <h5 th:if="${param.error != null}">上传失败了喵, 有啥问题我也不知道喵</h5>
         <div class="col s12 m6 container">
             <form method="post" th:action="@{/importFile}" enctype="multipart/form-data">
+                <a th:href="@{/template.xlsx}">下载模板</a>
                 <input type="file" name="file" class="file-path validate"/>
                 <br/><br/>
                 <input type="submit" name="submit"/>
