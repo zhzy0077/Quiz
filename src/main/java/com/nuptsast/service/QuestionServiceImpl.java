@@ -36,7 +36,7 @@ public class QuestionServiceImpl implements QuestionService {
         for (Question question : questions) {
             Collections.shuffle(question.getChoices());
         }
-//        Collections.shuffle(questions);
+        Collections.shuffle(questions);
         return questions;
     }
 
