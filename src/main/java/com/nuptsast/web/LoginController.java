@@ -16,15 +16,15 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-    private Logger logger = Logger.getLogger(getClass());
+  private Logger logger = Logger.getLogger(getClass());
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String login(Model model, HttpSession session) {
+  @RequestMapping(method = RequestMethod.GET)
+  public String login(Model model, HttpSession session) {
 //        logger.info("sesson has " + session.getAttributeNames() + session.getAttribute("lastUsername"));
-        if (session.getAttribute("lastUsername") != null)
-            model.addAttribute("user", new User((String) session.getAttribute("lastUsername"), null));
-        else
-            model.addAttribute("user", new User());
-        return "login";
-    }
+    if (session.getAttribute("lastUsername") != null)
+      model.addAttribute("user", new User((String) session.getAttribute("lastUsername"), null));
+    else
+      model.addAttribute("user", new User());
+    return "login";
+  }
 }

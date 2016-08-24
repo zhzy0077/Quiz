@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/faq")
 public class FaqController {
-    private final FaqService faqService;
+  private final FaqService faqService;
 
-    @Autowired
-    public FaqController(FaqService faqService) {
-        this.faqService = faqService;
-    }
+  @Autowired
+  public FaqController(FaqService faqService) {
+    this.faqService = faqService;
+  }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String showFaq(Model model) {
-        model.addAttribute("faqs", faqService.getFaq());
-        return "faq";
-    }
+  @RequestMapping(method = RequestMethod.GET)
+  public String showFaq(Model model) {
+    model.addAttribute("faqs", faqService.getFaq());
+    return "faq";
+  }
 }

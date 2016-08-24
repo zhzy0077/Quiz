@@ -10,7 +10,7 @@ import java.util.List;
  * All Rights Reversed.
  */
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    List<Question> findByDepartment(String department);
+  List<Question> findByDepartment(String department);
 
-    List<Question> findByQuestionContaining(String question);
+  List<Question> findByQuestionContaining(String question);
 }

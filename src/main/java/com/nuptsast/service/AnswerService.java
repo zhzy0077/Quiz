@@ -9,7 +9,7 @@ import java.util.Map;
  * All Rights Reversed.
  */
 public interface AnswerService {
-    Answer saveAnswer(Long userId, Long questionId, String answer);
+  Answer saveAnswer(Long userId, Long questionId, String answer);
 
-    Map<Long, String> findAnswerByUserId(Long userId);
+  Map<Long, String> findAnswerByUserId(Long userId);
 }

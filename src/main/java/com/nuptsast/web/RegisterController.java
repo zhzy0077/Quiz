@@ -20,29 +20,29 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-    private UserService userService;
+  private UserService userService;
 
-    @Autowired
-    public RegisterController(UserService userService) {
-        this.userService = userService;
-    }
+  @Autowired
+  public RegisterController(UserService userService) {
+    this.userService = userService;
+  }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String register(Model model) {
-        model.addAttribute("user", new User());
-        return "register";
-    }
+  @RequestMapping(method = RequestMethod.GET)
+  public String register(Model model) {
+    model.addAttribute("user", new User());
+    return "register";
+  }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String processRegister(@Valid User user, Errors errors, HttpServletRequest request) throws ServletException {
-        if (errors.hasErrors()) {
+  @RequestMapping(method = RequestMethod.POST)
+  public String processRegister(@Valid User user, Errors errors, HttpServletRequest request) throws ServletException {
+    if (errors.hasErrors()) {
 //            System.out.println(errors.getAllErrors());
-            return "register";
-        }
-        userService.register(user);
-        request.login(user.getUsername(), user.getPassword());
-        return "redirect:/profile";
+      return "register";
     }
+    userService.register(user);
+    request.login(user.getUsername(), user.getPassword());
+    return "redirect:/profile";
+  }
 
 
 }

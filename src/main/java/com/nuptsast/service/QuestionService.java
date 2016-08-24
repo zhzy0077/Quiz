@@ -12,13 +12,13 @@ import java.util.List;
  */
 
 public interface QuestionService {
-    Question addQuestion(Question question);
+  Question addQuestion(Question question);
 
-    List<Question> getQuestions(String department);
+  List<Question> getQuestions(String department);
 
-    void removeQuestion(Long id);
+  void removeQuestion(Long id);
 
-    List<Question> findQuestionContaining(String question);
+  List<Question> findQuestionContaining(String question);
 
-    Boolean importFile(InputStream file) throws IOException;
+  Boolean importFile(InputStream file) throws IOException;
 }

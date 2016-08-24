@@ -12,60 +12,60 @@ import java.util.List;
  */
 @Entity
 public class Question {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @NotNull
-    private String question;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Choice> choices;
-    @NotNull
-    private String department;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+  @NotNull
+  private String question;
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<Choice> choices;
+  @NotNull
+  private String department;
 
 
-    public Question(String question, List<Choice> choices, String department) {
-        this.question = question;
-        this.choices = choices;
-        this.department = department;
-    }
+  public Question(String question, List<Choice> choices, String department) {
+    this.question = question;
+    this.choices = choices;
+    this.department = department;
+  }
 
-    public Question() {
-    }
+  public Question() {
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getQuestion() {
-        return question;
-    }
+  public String getQuestion() {
+    return question;
+  }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
+  public void setQuestion(String question) {
+    this.question = question;
+  }
 
-    public List<Choice> getChoices() {
-        return choices;
-    }
+  public List<Choice> getChoices() {
+    return choices;
+  }
 
-    public void setChoices(List<Choice> choices) {
-        this.choices = choices;
-    }
+  public void setChoices(List<Choice> choices) {
+    this.choices = choices;
+  }
 
-    public String getDepartment() {
-        return department;
-    }
+  public String getDepartment() {
+    return department;
+  }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
+  public void setDepartment(String department) {
+    this.department = department;
+  }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this);
+  }
 }

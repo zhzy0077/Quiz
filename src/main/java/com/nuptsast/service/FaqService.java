@@ -9,5 +9,5 @@ import java.util.List;
  * All Rights Reversed.
  */
 public interface FaqService {
-    List<Faq> getFaq();
+  List<Faq> getFaq();
 }

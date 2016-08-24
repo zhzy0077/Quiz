@@ -10,7 +10,7 @@ import java.util.List;
  * All Rights Reversed.
  */
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
-    Answer findOneByUserIdAndQuestionId(Long userId, Long questionId);
+  Answer findOneByUserIdAndQuestionId(Long userId, Long questionId);
 
-    List<Answer> findByUserId(Long userId);
+  List<Answer> findByUserId(Long userId);
 }

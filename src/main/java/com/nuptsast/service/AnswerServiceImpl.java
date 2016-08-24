@@ -16,35 +16,35 @@ import java.util.Map;
  */
 @Service
 public class AnswerServiceImpl implements AnswerService {
-    private final Logger logger = Logger.getLogger(getClass());
-    private final AnswerRepository answerRepository;
+  private final Logger logger = Logger.getLogger(getClass());
+  private final AnswerRepository answerRepository;
 
-    @Autowired
-    public AnswerServiceImpl(AnswerRepository answerRepository) {
-        this.answerRepository = answerRepository;
-    }
+  @Autowired
+  public AnswerServiceImpl(AnswerRepository answerRepository) {
+    this.answerRepository = answerRepository;
+  }
 
-    @Override
-    public Answer saveAnswer(Long userId, Long questionId, String answer) {
-        Answer answerSaved = answerRepository.findOneByUserIdAndQuestionId(userId, questionId);
-        if (answerSaved != null) {
-            answerSaved.setAnswer(answer);
-            answerRepository.saveAndFlush(answerSaved);
-            return answerSaved;
-        } else {
-            Answer answerInput = new Answer(userId, questionId, answer);
-            return answerRepository.saveAndFlush(answerInput);
-        }
+  @Override
+  public Answer saveAnswer(Long userId, Long questionId, String answer) {
+    Answer answerSaved = answerRepository.findOneByUserIdAndQuestionId(userId, questionId);
+    if (answerSaved != null) {
+      answerSaved.setAnswer(answer);
+      answerRepository.saveAndFlush(answerSaved);
+      return answerSaved;
+    } else {
+      Answer answerInput = new Answer(userId, questionId, answer);
+      return answerRepository.saveAndFlush(answerInput);
     }
+  }
 
-    @Override
-    public Map<Long, String> findAnswerByUserId(Long userId) {
-        List<Answer> answers = answerRepository.findByUserId(userId);
-        Map<Long, String> finished = new HashMap<>();
-        for (Answer answer : answers) {
-            finished.put(answer.getQuestionId(), answer.getAnswer());
-        }
-        logger.info(answers);
-        return finished;
+  @Override
+  public Map<Long, String> findAnswerByUserId(Long userId) {
+    List<Answer> answers = answerRepository.findByUserId(userId);
+    Map<Long, String> finished = new HashMap<>();
+    for (Answer answer : answers) {
+      finished.put(answer.getQuestionId(), answer.getAnswer());
     }
+    logger.info(answers);
+    return finished;
+  }
 }

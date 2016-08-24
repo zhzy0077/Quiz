@@ -13,15 +13,15 @@ import java.util.List;
  */
 @Service
 public class FaqServiceImpl implements FaqService {
-    private final FaqRepository faqRepository;
+  private final FaqRepository faqRepository;
 
-    @Autowired
-    public FaqServiceImpl(FaqRepository faqRepository) {
-        this.faqRepository = faqRepository;
-    }
+  @Autowired
+  public FaqServiceImpl(FaqRepository faqRepository) {
+    this.faqRepository = faqRepository;
+  }
 
-    @Override
-    public List<Faq> getFaq() {
-        return faqRepository.findAll();
-    }
+  @Override
+  public List<Faq> getFaq() {
+    return faqRepository.findAll();
+  }
 }

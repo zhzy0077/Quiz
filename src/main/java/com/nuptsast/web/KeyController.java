@@ -15,20 +15,20 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/key")
 public class KeyController {
-    private final String KEY = "sast2016";
+  private final String KEY = "sast2016";
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String getKey() {
-        return "key";
-    }
+  @RequestMapping(method = RequestMethod.GET)
+  public String getKey() {
+    return "key";
+  }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String submitKey(@RequestParam String key, HttpSession session) {
-        if (Objects.equals(KEY, key)) {
-            session.setAttribute("key", Boolean.TRUE);
-            return "redirect:/exam";
-        } else {
-            return "redirect:/key?error";
-        }
+  @RequestMapping(method = RequestMethod.POST)
+  public String submitKey(@RequestParam String key, HttpSession session) {
+    if (Objects.equals(KEY, key)) {
+      session.setAttribute("key", Boolean.TRUE);
+      return "redirect:/exam";
+    } else {
+      return "redirect:/key?error";
     }
+  }
 }

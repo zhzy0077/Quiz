@@ -13,17 +13,17 @@ import org.springframework.stereotype.Component;
  */
 @SpringBootApplication
 public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 }
 
 @Component
 class ServletCustomizer implements EmbeddedServletContainerCustomizer {
-    @Override
-    public void customize(ConfigurableEmbeddedServletContainer container) {
-        MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
-        mappings.add("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        container.setMimeMappings(mappings);
-    }
+  @Override
+  public void customize(ConfigurableEmbeddedServletContainer container) {
+    MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
+    mappings.add("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    container.setMimeMappings(mappings);
+  }
 }
