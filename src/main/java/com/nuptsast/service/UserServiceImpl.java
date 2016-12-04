@@ -24,8 +24,10 @@ public class UserServiceImpl implements UserService {
   @Override
   public User register(User user) {
     String encodedPass = new BCryptPasswordEncoder().encode(user.getPassword());
-    User newUser = new User(user.getUsername(), encodedPass, user.getTargetDepartment(), user.getPhoneNumber());
-    return userRepository.saveAndFlush(newUser);
+    user.setPassword(encodedPass);
+//    User newUser = new User(user.getUsername(), encodedPass, user.getTargetDepartment(), user.getPhoneNumber());
+    logger.info(user);
+    return userRepository.save(user);
   }
 
   @Override
