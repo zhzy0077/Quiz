@@ -7,9 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.MimeMappings;
+import org.springframework.boot.web.server.MimeMappings;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -41,11 +41,11 @@ public class Application {
 }
 
 @Component
-class ServletCustomizer implements EmbeddedServletContainerCustomizer {
+class ServletCustomizer implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> {
   @Override
-  public void customize(ConfigurableEmbeddedServletContainer container) {
+  public void customize(ConfigurableServletWebServerFactory factory) {
     MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
     mappings.add("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-    container.setMimeMappings(mappings);
+    factory.setMimeMappings(mappings);
   }
 }

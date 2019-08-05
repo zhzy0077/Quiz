@@ -2,7 +2,8 @@ package com.nuptsast.service;
 
 import com.nuptsast.data.UserRepository;
 import com.nuptsast.model.User;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl implements UserService {
-  private Logger logger = Logger.getLogger(getClass());
+  private Logger logger = LoggerFactory.getLogger(getClass());
   private UserRepository userRepository;
 
   @Autowired
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
     String encodedPass = new BCryptPasswordEncoder().encode(user.getPassword());
     user.setPassword(encodedPass);
 //    User newUser = new User(user.getUsername(), encodedPass, user.getTargetDepartment(), user.getPhoneNumber());
-    logger.info(user);
+    logger.info("{}", user);
     return userRepository.save(user);
   }
 

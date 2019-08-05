@@ -4,7 +4,8 @@ import com.nuptsast.model.Question;
 import com.nuptsast.model.User;
 import com.nuptsast.service.AnswerService;
 import com.nuptsast.service.QuestionService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ import java.util.Objects;
 public class ExamController {
   private final QuestionService questionService;
   private final AnswerService answerService;
-  private Logger logger = Logger.getLogger(getClass());
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
   @Autowired
   public ExamController(QuestionService questionService, AnswerService answerService) {
@@ -38,7 +39,7 @@ public class ExamController {
   public String selectQuestion(HttpSession session) {
     User user = (User) session.getAttribute("user");
     if (session.getAttribute("questions") == null) {
-      logger.info(user);
+      logger.info("{}", user);
       session.setAttribute("questions", questionService.getQuestions(user.getTargetDepartment()));
       session.setAttribute("finished", answerService.findAnswerByUserId(user.getId()));
     }

@@ -47,7 +47,7 @@ public class QuestionServiceImpl implements QuestionService {
 
   @Override
   public void removeQuestion(Long id) {
-    questionRepository.delete(id);
+    questionRepository.deleteById(id);
   }
 
   @Override

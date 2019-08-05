@@ -2,7 +2,8 @@ package com.nuptsast.web;
 
 import com.nuptsast.model.User;
 import com.nuptsast.service.UserService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,9 +22,8 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/profile")
 public class ProfileController {
   private final UserService userService;
-  private Logger logger = Logger.getLogger(getClass());
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-  @SuppressWarnings("SpringJavaAutowiringInspection")
   @Autowired
   public ProfileController(UserService userService) {
     this.userService = userService;

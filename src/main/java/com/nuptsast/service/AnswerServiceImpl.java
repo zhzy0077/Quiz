@@ -2,7 +2,8 @@ package com.nuptsast.service;
 
 import com.nuptsast.data.AnswerRepository;
 import com.nuptsast.model.Answer;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 @Service
 public class AnswerServiceImpl implements AnswerService {
-  private final Logger logger = Logger.getLogger(getClass());
+  private final Logger logger = LoggerFactory.getLogger(getClass());
   private final AnswerRepository answerRepository;
 
   @Autowired
@@ -44,7 +45,7 @@ public class AnswerServiceImpl implements AnswerService {
     for (Answer answer : answers) {
       finished.put(answer.getQuestionId(), answer.getAnswer());
     }
-    logger.info(answers);
+    logger.info("{}", answers);
     return finished;
   }
 }
